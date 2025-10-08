@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Gaming Hub - Team Omniverse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            flex: 1;
+        }
+
+        .welcome-content {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .game-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .game-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .game-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .game-info h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .game-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .game-info li {
+            color: #555;
+            margin-bottom: 0.3rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .game-info li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .play-btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 25px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            margin: 0.3rem 0;
+        }
+
+        .team-name {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .team-leader-name {
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-content h2 {
+                font-size: 2rem;
+            }
+
+            .game-cards {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .card-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <h1 class="logo">🎮 Interactive Gaming Hub</h1>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="welcome-content">
+            <h2>Welcome to Interactive Gaming Hub</h2>
+            <p>Choose your favorite classic game to start playing!</p>
+            
+            <div class="game-cards">
+                <div class="game-card">
+                    <div class="card-icon">🔢</div>
+                    <h3>Sudoku</h3>
+                    <p>Challenge your mind with number puzzles</p>
+                    
+                    <div class="game-info">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>9×9 grid puzzle</li>
+                            <li>Multiple difficulty levels</li>
+                            <li>Hint system</li>
+                            <li>Error tracking</li>
+                            <li>Timer & scoring</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="play-btn" onclick="alert('Sudoku game will open here!')">Play Sudoku</button>
+                </div>
+
+                <div class="game-card">
+                    <div class="card-icon">🐍🪜</div>
+                    <h3>Snake & Ladder</h3>
+                    <p>Classic board game with digital dice</p>
+                    
+                    <div class="game-info">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>10×10 game board</li>
+                            <li>Digital dice rolling</li>
+                            <li>Snakes & Ladders</li>
+                            <li>Animated movements</li>
+                            <li>Move counter & timer</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="play-btn" onclick="alert('Snake & Ladder game will open here!')">Play Snake & Ladder</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Interactive Gaming Hub</strong> &copy; 2025</p>
+        <p>Created by <span class="team-name">Team Omniverse</span></p>
+        <p>Frontend Role <span class="team-leader-name">Bipanshu Kashyap</span></p>
+        <p>B.Tech CSE - Data Structures Project</p>
+    </footer>
+</body>
+</html>
