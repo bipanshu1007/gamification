@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Gaming Hub - Team Omniverse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .back-btn {
+            padding: 0.6rem 1.5rem;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            background: white;
+            color: #667eea;
+            cursor: pointer;
+            font-weight: 600;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-btn:active {
+            transform: translateY(0);
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            flex: 1;
+        }
+
+        .welcome-content {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .welcome-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .game-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: cardSlideIn 0.6s ease-out backwards;
+        }
+
+        .game-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .game-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes cardSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .game-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .game-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .game-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .game-info h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .game-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .game-info li {
+            color: #555;
+            margin-bottom: 0.3rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.9rem;
+            animation: fadeInLeft 0.5s ease-out backwards;
+        }
+
+        .game-info li:nth-child(1) { animation-delay: 0.1s; }
+        .game-info li:nth-child(2) { animation-delay: 0.2s; }
+        .game-info li:nth-child(3) { animation-delay: 0.3s; }
+        .game-info li:nth-child(4) { animation-delay: 0.4s; }
+        .game-info li:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .game-info li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .play-btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 25px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-btn:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .play-btn:hover:before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .play-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .play-btn:active {
+            transform: scale(0.95);
+        }
+
+        .game-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: zoomIn 0.5s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Sudoku Styles */
+        .sudoku-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 0;
+            width: 450px;
+            height: 450px;
+            margin: 1.5rem auto;
+            border: 3px solid #333;
+        }
+
+        .sudoku-cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sudoku-cell:focus {
+            background: #e3f2fd;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+            z-index: 10;
+        }
+
+        .sudoku-cell:nth-child(3n):not(:nth-child(9n)) {
+            border-right: 3px solid #333;
+        }
+
+        .sudoku-cell:nth-child(n+19):nth-child(-n+27),
+        .sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+            border-bottom: 3px solid #333;
+        }
+
+        .sudoku-cell.filled {
+            background: #e8e8e8;
+            color: #333;
+        }
+
+        .sudoku-cell.user-input {
+            background: white;
+            color: #667eea;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .sudoku-cell.hint-cell {
+            background: #fffacd;
+            color: #ff6b6b;
+            animation: hintPulse 0.5s ease-in-out;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .sudoku-cell.error {
+            background: #ffcccc;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: #5568d3;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+        }
+
+        .control-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: #333;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Snake & Ladder Styles - UPDATED LAYOUT */
+        .snl-game-layout {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .snl-board-container {
+            flex: 0 0 auto;
+        }
+
+        .snl-board {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 2px;
+            width: 500px;
+            height: 500px;
+            margin: 1.5rem auto;
+            background: #333;
+            padding: 2px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .snl-cell {
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #333;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .snl-cell:hover {
+            background: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        .snl-cell.snake::before {
+            content: '🐍';
+            position: absolute;
+            font-size: 1.5rem;
+            top: 2px;
+            right: 2px;
+            z-index: 5;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        .snl-cell.ladder::before {
+            content: '🪜';
+            position: absolute;
+            font-size: 1.5rem;
+            top: 2px;
+            right: 2px;
+            z-index: 5;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .player-token {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 10;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .player-token.moving {
+            animation: jump 0.5s ease-in-out;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.2); }
+        }
+
+        /* UPDATED: Sidebar Legend Styles */
+        .snl-legend {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            flex: 0 0 280px;
+            max-height: 540px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .snl-legend h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.1rem;
+            position: sticky;
+            top: 0;
+            background: #f8f9fa;
+            padding-bottom: 0.5rem;
+            z-index: 5;
+        }
+
+        .legend-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .legend-section h4 {
+            color: #333;
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .legend-item {
+            background: white;
+            padding: 0.7rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.4s ease-out backwards;
+        }
+
+        .legend-item:nth-child(1) { animation-delay: 0.05s; }
+        .legend-item:nth-child(2) { animation-delay: 0.1s; }
+        .legend-item:nth-child(3) { animation-delay: 0.15s; }
+        .legend-item:nth-child(4) { animation-delay: 0.2s; }
+        .legend-item:nth-child(5) { animation-delay: 0.25s; }
+        .legend-item:nth-child(6) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .legend-item:hover {
+            transform: translateX(10px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .legend-item .arrow {
+            color: #667eea;
+            font-weight: bold;
+            margin: 0 0.5rem;
+        }
+
+        .dice-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .dice {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 3px solid #333;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dice:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .dice:active {
+            transform: scale(0.95);
+        }
+
+        .dice.rolling {
+            animation: roll3D 0.6s ease-in-out;
+        }
+
+        @keyframes roll3D {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            25% { transform: rotateX(180deg) rotateY(90deg); }
+            50% { transform: rotateX(360deg) rotateY(180deg); }
+            75% { transform: rotateX(540deg) rotateY(270deg); }
+            100% { transform: rotateX(720deg) rotateY(360deg); }
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            margin-top: 3rem;
+            animation: fadeIn 1s ease-out 0.5s backwards;
+        }
+
+        .footer p {
+            margin: 0.3rem 0;
+        }
+
+        .team-name {
+            color: #667eea;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .team-name:hover {
+            color: #5568d3;
+            transform: scale(1.1);
+            display: inline-block;
+        }
+
+        .team-leader-name {
+            color: #764ba2;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .team-leader-name:hover {
+            color: #5e3a82;
+            transform: scale(1.1);
+            display: inline-block;
+        }
+
+        /* Celebration Animation */
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            animation: confetti 3s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-content h2 {
+                font-size: 2rem;
+            }
+
+            .game-cards {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .sudoku-grid {
+                width: 320px;
+                height: 320px;
+            }
+
+            .sudoku-cell {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+
+            .snl-game-layout {
+                flex-direction: column;
+            }
+
+            .snl-board {
+                width: 350px;
+                height: 350px;
+            }
+
+            .snl-cell.snake::before,
+            .snl-cell.ladder::before {
+                font-size: 1.2rem;
+            }
+
+            .snl-legend {
+                flex: 1 1 auto;
+                width: 100%;
+                max-height: 300px;
+            }
+
+            .legend-item {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <h1 class="logo">🎮 Interactive Gaming Hub</h1>
+            <button class="back-btn" onclick="showHome()">← Back to Home</button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div id="home" class="welcome-content">
+            <h2>Welcome to Interactive Gaming Hub</h2>
+            <p>Choose your favorite classic game to start playing!</p>
+            
+            <div class="game-cards">
+                <div class="game-card">
+                    <div class="card-icon">🔢</div>
+                    <h3>Sudoku</h3>
+                    <p>Challenge your mind with number puzzles</p>
+                    
+                    <div class="game-info">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>9×9 grid puzzle</li>
+                            <li>Multiple difficulty levels</li>
+                            <li>Smart hint system</li>
+                            <li>Error tracking</li>
+                            <li>Timer & scoring</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="play-btn" onclick="showSudoku()">Play Sudoku</button>
+                </div>
+
+                <div class="game-card">
+                    <div class="card-icon">🐍🪜</div>
+                    <h3>Snake & Ladder</h3>
+                    <p>Classic board game with digital dice</p>
+                    
+                    <div class="game-info">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>10×10 game board</li>
+                            <li>14 Ladders & 6 Snakes</li>
+                            <li>Digital dice rolling</li>
+                            <li>Animated movements</li>
+                            <li>Move counter & timer</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="play-btn" onclick="showSnakeLadder()">Play Snake & Ladder</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sudoku Game -->
+        <div id="sudoku" class="game-container">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 1rem;">Sudoku</h2>
+            <div class="game-stats">
+                <div>Time: <span id="sudoku-time">0:00</span></div>
+                <div>Errors: <span id="sudoku-errors">0</span></div>
+                <div>Hints: <span id="sudoku-hints">3</span></div>
+            </div>
+            <div id="sudoku-grid" class="sudoku-grid"></div>
+            <div class="game-controls">
+                <button class="control-btn" onclick="newSudokuGame('easy')">Easy</button>
+                <button class="control-btn" onclick="newSudokuGame('medium')">Medium</button>
+                <button class="control-btn" onclick="newSudokuGame('hard')">Hard</button>
+                <button class="control-btn" id="hint-btn" onclick="giveHint()">💡 Hint</button>
+                <button class="control-btn" onclick="checkSudoku()">Check</button>
+                <button class="control-btn" onclick="clearSudoku()">Clear</button>
+            </div>
+        </div>
+
+        <!-- Snake & Ladder Game -->
+        <div id="snakeLadder" class="game-container">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 1rem;">Snake & Ladder</h2>
+            <div class="game-stats">
+                <div>Position: <span id="snl-position">1</span></div>
+                <div>Moves: <span id="snl-moves">0</span></div>
+                <div>Time: <span id="snl-time">0:00</span></div>
+            </div>
+            
+            <div class="snl-game-layout">
+                <div class="snl-board-container">
+                    <div id="snl-board" class="snl-board"></div>
+                </div>
+                
+                <div class="snl-legend">
+                    <h3>📍 Snakes & Ladders</h3>
+                    
+                    <div class="legend-section">
+                        <h4>🐍 Snakes</h4>
+                        <div class="legend-items" id="snakes-list"></div>
+                    </div>
+                    
+                    <div class="legend-section">
+                        <h4>🪜 Ladders</h4>
+                        <div class="legend-items" id="ladders-list"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dice-container">
+                <div>Click the dice to roll!</div>
+                <div id="dice" class="dice" onclick="rollDice()">🎲</div>
+                <div id="dice-result" style="font-weight: bold; margin-top: 0.5rem;"></div>
+            </div>
+            <div class="game-controls">
+                <button class="control-btn" onclick="resetSnakeLadder()">New Game</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Interactive Gaming Hub</strong> &copy; 2025</p>
+        <p>Created by <span class="team-name">Team Omniverse</span></p>
+        <p>Frontend Role <span class="team-leader-name">Bipanshu Kashyap</span></p>
+        <p>B.Tech CSE - Data Structures Project</p>
+    </footer>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        let currentView = 'home';
+        let currentPlayerName = 'Player';
+        
+        let sudokuBoard = [];
+        let sudokuSolution = [];
+        let sudokuTimer = null;
+        let sudokuStartTime = 0;
+        let sudokuErrors = 0;
+        let sudokuHints = 3;
+        let selectedCell = null;
+
+        let playerPosition = 1;
+        let snlMoves = 0;
+        let snlTimer = null;
+        let snlStartTime = 0;
+        const snakes = {27: 1, 21: 9, 17: 4, 19: 7, 95: 24, 99: 78};
+        const ladders = {
+            3: 22, 5: 8, 11: 26, 20: 29, 36: 44, 51: 67,
+            13: 42, 18: 38, 24: 56, 31: 70, 47: 85, 63: 81, 71: 91, 80: 98
+        };
+
+        function showHome() {
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('sudoku').style.display = 'none';
+            document.getElementById('snakeLadder').style.display = 'none';
+            document.querySelector('.back-btn').style.display = 'none';
+            currentView = 'home';
+            stopAllTimers();
+        }
+
+        function showSudoku() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('sudoku').style.display = 'block';
+            document.getElementById('snakeLadder').style.display = 'none';
+            document.querySelector('.back-btn').style.display = 'block';
+            currentView = 'sudoku';
+            newSudokuGame('easy');
+        }
+
+        function showSnakeLadder() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('sudoku').style.display = 'none';
+            document.getElementById('snakeLadder').style.display = 'block';
+            document.querySelector('.back-btn').style.display = 'block';
+            currentView = 'snakeLadder';
+            initSnakeLadder();
+        }
+
+        function stopAllTimers() {
+            if (sudokuTimer) clearInterval(sudokuTimer);
+            if (snlTimer) clearInterval(snlTimer);
+        }
+
+        function generateSudoku(difficulty) {
+            const base = [
+                [5,3,4,6,7,8,9,1,2],
+                [6,7,2,1,9,5,3,4,8],
+                [1,9,8,3,4,2,5,6,7],
+                [8,5,9,7,6,1,4,2,3],
+                [4,2,6,8,5,3,7,9,1],
+                [7,1,3,9,2,4,8,5,6],
+                [9,6,1,5,3,7,2,8,4],
+                [2,8,7,4,1,9,6,3,5],
+                [3,4,5,2,8,6,1,7,9]
+            ];
+            
+            const cellsToRemove = difficulty === 'easy' ? 35 : difficulty === 'medium' ? 45 : 55;
+            const board = base.map(row => [...row]);
+            const solution = base.map(row => [...row]);
+            
+            let removed = 0;
+            while (removed < cellsToRemove) {
+                const row = Math.floor(Math.random() * 9);
+                const col = Math.floor(Math.random() * 9);
+                if (board[row][col] !== 0) {
+                    board[row][col] = 0;
+                    removed++;
+                }
+            }
+            
+            return { board, solution };
+        }
+
+        function newSudokuGame(difficulty) {
+            const { board, solution } = generateSudoku(difficulty);
+            sudokuBoard = board;
+            sudokuSolution = solution;
+            sudokuErrors = 0;
+            sudokuHints = 3;
+            sudokuStartTime = Date.now();
+            
+            document.getElementById('sudoku-errors').textContent = '0';
+            document.getElementById('sudoku-hints').textContent = '3';
+            document.getElementById('hint-btn').disabled = false;
+            
+            if (sudokuTimer) clearInterval(sudokuTimer);
+            sudokuTimer = setInterval(updateSudokuTime, 1000);
+            
+            renderSudoku();
+        }
+
+        function renderSudoku() {
+            const grid = document.getElementById('sudoku-grid');
+            grid.innerHTML = '';
+            
+            for (let i = 0; i < 9; i++) {
+                for (let j = 0; j < 9; j++) {
+                    const cell = document.createElement('input');
+                    cell.type = 'text';
+                    cell.maxLength = 1;
+                    cell.className = 'sudoku-cell';
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    
+                    if (sudokuBoard[i][j] !== 0) {
+                        cell.value = sudokuBoard[i][j];
+                        cell.classList.add('filled');
+                        cell.readOnly = true;
+                    } else {
+                        cell.addEventListener('input', handleSudokuInput);
+                        cell.addEventListener('keydown', handleSudokuKeyboard);
+                    }
+                    
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        function handleSudokuInput(e) {
+            const value = e.target.value;
+            if (value && !/^[1-9]$/.test(value)) {
+                e.target.value = '';
+                return;
+            }
+            if (value) {
+                e.target.classList.add('user-input');
+            } else {
+                e.target.classList.remove('user-input');
+            }
+        }
+
+        function handleSudokuKeyboard(e) {
+            const row = parseInt(e.target.dataset.row);
+            const col = parseInt(e.target.dataset.col);
+            const grid = document.getElementById('sudoku-grid');
+            
+            let newRow = row, newCol = col;
+            
+            if (e.key === 'ArrowUp' && row > 0) newRow--;
+            else if (e.key === 'ArrowDown' && row < 8) newRow++;
+            else if (e.key === 'ArrowLeft' && col > 0) newCol--;
+            else if (e.key === 'ArrowRight' && col < 8) newCol++;
+            else return;
+            
+            e.preventDefault();
+            const newCell = grid.children[newRow * 9 + newCol];
+            if (!newCell.readOnly) newCell.focus();
+        }
+
+        function giveHint() {
+            if (sudokuHints <= 0) {
+                alert('No hints remaining!');
+                return;
+            }
+            
+            const cells = document.querySelectorAll('.sudoku-cell:not(.filled):not(.hint-cell)');
+            const emptyCells = Array.from(cells).filter(cell => !cell.value);
+            
+            if (emptyCells.length === 0) {
+                alert('No empty cells to hint!');
+                return;
+            }
+            
+            const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            const row = parseInt(randomCell.dataset.row);
+            const col = parseInt(randomCell.dataset.col);
+            
+            randomCell.value = sudokuSolution[row][col];
+            randomCell.classList.add('hint-cell');
+            randomCell.readOnly = true;
+            
+            sudokuHints--;
+            document.getElementById('sudoku-hints').textContent = sudokuHints;
+            
+            if (sudokuHints === 0) {
+                document.getElementById('hint-btn').disabled = true;
+            }
+            
+            showNotification(`💡 Hint: ${sudokuSolution[row][col]} placed at Row ${row + 1}, Col ${col + 1}`);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #667eea; color: white; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; animation: slideIn 0.3s ease-out;';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function checkSudoku() {
+            const cells = document.querySelectorAll('.sudoku-cell');
+            let correct = true;
+            sudokuErrors = 0;
+            
+            cells.forEach(cell => {
+                cell.classList.remove('error');
+                if (!cell.readOnly && cell.value && !cell.classList.contains('hint-cell')) {
+                    const row = parseInt(cell.dataset.row);
+                    const col = parseInt(cell.dataset.col);
+                    if (parseInt(cell.value) !== sudokuSolution[row][col]) {
+                        cell.classList.add('error');
+                        sudokuErrors++;
+                        correct = false;
+                    }
+                }
+            });
+            
+            document.getElementById('sudoku-errors').textContent = sudokuErrors;
+            
+            const allFilled = Array.from(cells).every(cell => cell.value !== '');
+            if (allFilled && correct) {
+                clearInterval(sudokuTimer);
+                createConfetti();
+                setTimeout(() => alert('🎉 Congratulations! You solved the puzzle!'), 100);
+            }
+        }
+
+        function clearSudoku() {
+            const cells = document.querySelectorAll('.sudoku-cell:not(.filled):not(.hint-cell)');
+            cells.forEach(cell => {
+                cell.value = '';
+                cell.classList.remove('user-input', 'error');
+            });
+            sudokuErrors = 0;
+            document.getElementById('sudoku-errors').textContent = '0';
+        }
+
+        function updateSudokuTime() {
+            const elapsed = Math.floor((Date.now() - sudokuStartTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('sudoku-time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function initSnakeLadder() {
+            playerPosition = 1;
+            snlMoves = 0;
+            snlStartTime = Date.now();
+            
+            document.getElementById('snl-position').textContent = '1';
+            document.getElementById('snl-moves').textContent = '0';
+            document.getElementById('dice-result').textContent = '';
+            
+            if (snlTimer) clearInterval(snlTimer);
+            snlTimer = setInterval(updateSnlTime, 1000);
+            
+            renderSnakeLadder();
+            renderLegend();
+        }
+
+        function renderLegend() {
+            const snakesList = document.getElementById('snakes-list');
+            const laddersList = document.getElementById('ladders-list');
+            
+            snakesList.innerHTML = '';
+            laddersList.innerHTML = '';
+            
+            Object.entries(snakes).sort((a, b) => parseInt(a[0]) - parseInt(b[0])).forEach(([from, to]) => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `${from}<span class="arrow">→</span>${to}`;
+                snakesList.appendChild(item);
+            });
+            
+            Object.entries(ladders).sort((a, b) => parseInt(a[0]) - parseInt(b[0])).forEach(([from, to]) => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `${from}<span class="arrow">→</span>${to}`;
+                laddersList.appendChild(item);
+            });
+        }
+
+        function renderSnakeLadder() {
+            const board = document.getElementById('snl-board');
+            board.innerHTML = '';
+            
+            for (let row = 9; row >= 0; row--) {
+                for (let col = 0; col < 10; col++) {
+                    const cellNum = row % 2 === 1 ? (row * 10 + col + 1) : (row * 10 + (10 - col));
+                    const cell = document.createElement('div');
+                    cell.className = 'snl-cell';
+                    cell.textContent = cellNum;
+                    cell.id = `cell-${cellNum}`;
+                    
+                    if (snakes[cellNum]) cell.classList.add('snake');
+                    if (ladders[cellNum]) cell.classList.add('ladder');
+                    
+                    if (cellNum === playerPosition) {
+                        const token = document.createElement('div');
+                        token.className = 'player-token';
+                        token.textContent = '👤';
+                        cell.appendChild(token);
+                    }
+                    
+                    board.appendChild(cell);
+                }
+            }
+        }
+
+        function rollDice() {
+            const dice = document.getElementById('dice');
+            
+            dice.classList.add('rolling');
+            dice.textContent = '🎲';
+            
+            fetch(`${API_URL}/roll-dice`)
+                .then(res => res.json())
+                .then(data => {
+                    const result = data.dice;
+                    
+                    setTimeout(() => {
+                        dice.textContent = result;
+                        dice.classList.remove('rolling');
+                        document.getElementById('dice-result').textContent = `You rolled: ${result}`;
+                        movePlayer(result);
+                    }, 600);
+                })
+                .catch(err => {
+                    const result = Math.floor(Math.random() * 6) + 1;
+                    setTimeout(() => {
+                        dice.textContent = result;
+                        dice.classList.remove('rolling');
+                        document.getElementById('dice-result').textContent = `You rolled: ${result}`;
+                        movePlayer(result);
+                    }, 600);
+                });
+        }
+
+        function movePlayer(steps) {
+            snlMoves++;
+            document.getElementById('snl-moves').textContent = snlMoves;
+            
+            let newPosition = playerPosition + steps;
+            if (newPosition > 100) {
+                document.getElementById('dice-result').textContent += ' - Too high! Stay at ' + playerPosition;
+                return;
+            }
+            
+            // Add moving class for animation
+            const token = document.querySelector('.player-token');
+            if (token) token.classList.add('moving');
+            
+            fetch(`${API_URL}/snake-ladder/move`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({position: newPosition})
+            })
+            .then(res => res.json())
+            .then(data => {
+                setTimeout(() => {
+                    playerPosition = data.newPosition;
+                    
+                    if (data.event === 'snake') {
+                        document.getElementById('dice-result').textContent += ` 🐍 Snake! Down to ${playerPosition}`;
+                    } else if (data.event === 'ladder') {
+                        document.getElementById('dice-result').textContent += ` 🪜 Ladder! Up to ${playerPosition}`;
+                    }
+                    
+                    updatePlayerPosition();
+                    
+                    if (playerPosition === 100) {
+                        clearInterval(snlTimer);
+                        createConfetti();
+                        setTimeout(() => {
+                            alert('🎉 Congratulations! You won the game!');
+                            saveGameResult('Snake & Ladder', currentPlayerName);
+                        }, 600);
+                    }
+                }, 500);
+            })
+            .catch(err => {
+                setTimeout(() => {
+                    playerPosition = newPosition;
+                    
+                    if (snakes[playerPosition]) {
+                        playerPosition = snakes[playerPosition];
+                        document.getElementById('dice-result').textContent += ` 🐍 Snake! Down to ${playerPosition}`;
+                    } else if (ladders[playerPosition]) {
+                        playerPosition = ladders[playerPosition];
+                        document.getElementById('dice-result').textContent += ` 🪜 Ladder! Up to ${playerPosition}`;
+                    }
+                    
+                    updatePlayerPosition();
+                    
+                    if (playerPosition === 100) {
+                        clearInterval(snlTimer);
+                        createConfetti();
+                        setTimeout(() => alert('🎉 Congratulations! You won the game!'), 600);
+                    }
+                }, 500);
+            });
+        }
+
+        function updatePlayerPosition() {
+            document.getElementById('snl-position').textContent = playerPosition;
+            renderSnakeLadder();
+        }
+
+        function resetSnakeLadder() {
+            initSnakeLadder();
+        }
+
+        function updateSnlTime() {
+            const elapsed = Math.floor((Date.now() - snlStartTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('snl-time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Confetti celebration effect
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#ffd700', '#ff6b6b', '#4ecdc4'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 30);
+            }
+        }
+
+        async function saveGameResult(game, winner) {
+            try {
+                await fetch(`${API_URL}/save-result`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({game, winner})
+                });
+                console.log('Game result saved to backend');
+            } catch (err) {
+                console.log('Could not save to backend:', err);
+            }
+        }
+
+        async function loadLeaderboard() {
+            try {
+                const res = await fetch(`${API_URL}/leaderboard`);
+                const data = await res.json();
+                
+                if (data.data && data.data.length > 0) {
+                    let leaderboardHTML = '<h3 style="color: #667eea; margin-bottom: 1rem;">🏆 Leaderboard</h3>';
+                    leaderboardHTML += '<div style="max-height: 300px; overflow-y: auto;">';
+                    
+                    data.data.forEach((entry, index) => {
+                        leaderboardHTML += `
+                            <div style="background: #f8f9fa; padding: 0.8rem; margin: 0.5rem 0; border-radius: 8px;">
+                                <strong>${index + 1}. ${entry.game}</strong><br>
+                                <span style="color: #667eea;">Winner: ${entry.winner}</span><br>
+                                <small style="color: #999;">${entry.timestamp}</small>
+                            </div>
+                        `;
+                    });
+                    
+                    leaderboardHTML += '</div>';
+                    
+                    const popup = document.createElement('div');
+                    popup.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.3); z-index: 1000; max-width: 500px; width: 90%;';
+                    popup.innerHTML = leaderboardHTML + '<button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.7rem 1.5rem; background: #667eea; color: white; border: none; border-radius: 20px; cursor: pointer; width: 100%;">Close</button>';
+                    
+                    document.body.appendChild(popup);
+                } else {
+                    alert('No leaderboard data yet!');
+                }
+            } catch (err) {
+                alert('Could not load leaderboard. Make sure the backend server is running!');
+                console.error('Leaderboard error:', err);
+            }
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        window.addEventListener('load', () => {
+            const navContainer = document.querySelector('.nav-container');
+            const leaderboardBtn = document.createElement('button');
+            leaderboardBtn.textContent = '🏆 Leaderboard';
+            leaderboardBtn.className = 'back-btn';
+            leaderboardBtn.style.display = 'block';
+            leaderboardBtn.onclick = loadLeaderboard;
+            navContainer.appendChild(leaderboardBtn);
+        });
+    </script>
+</body>
+</html>
